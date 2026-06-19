@@ -1,0 +1,33 @@
+## Summary: Packets and Frames
+
+**Packets** (Layer 3) and **Frames** (Layer 2) are both small pieces of data but serve different purposes:
+
+- A **packet** contains an IP header and data payload — used for routing between networks
+- A **frame** wraps the packet and adds MAC addresses — used for delivery within a local network
+
+**The envelope analogy:**
+- Packet = the letter inside
+- Frame = the envelope carrying it
+
+---
+
+**Why packets exist:**
+Instead of sending one large chunk of data, it gets broken into small packets so that:
+- Network doesn't get clogged
+- If one packet is lost, only that one needs to be resent
+- Multiple devices can share the network simultaneously
+
+---
+
+**Key IP Packet Headers:**
+
+| Header | Purpose |
+|---|---|
+| **Source Address** | IP of the sender |
+| **Destination Address** | IP of the receiver |
+| **TTL** | Kills the packet after too many hops to prevent it looping forever |
+| **Checksum** | Verifies data wasn't corrupted in transit |
+
+---
+
+**Key point:** The packet stays the same the entire journey across the internet, but the frame is **replaced at every router hop** since MAC addresses only work locally.
