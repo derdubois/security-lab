@@ -1,5 +1,3 @@
-Sure! Here's a breakdown of the text.
-
 ---
 
 **What DNS Does (the core idea)**
