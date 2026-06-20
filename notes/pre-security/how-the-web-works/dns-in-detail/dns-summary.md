@@ -1,5 +1,3 @@
----
-
 **What DNS Does (the core idea)**
 
 DNS is basically the internet's phone book. Instead of memorizing numeric IP addresses like `104.26.10.229`, you type a human-readable name like `tryhackme.com` and DNS translates it to the right address behind the scenes.
