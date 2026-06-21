@@ -39,3 +39,28 @@ A full domain name like `jupiter.servers.tryhackme.com` has layers, read right t
 ---
 
 **Key terms to remember:** Recursive DNS Server, Authoritative Nameserver, TTL, and the five record types (A, AAAA, CNAME, MX, TXT). These come up constantly in networking and security contexts.
+
+**1. User types a URL**
+You open your browser and type something like `https://tryhackme.com/learn`. This is the starting point of everything.
+
+**2. Browser parses the URL**
+The browser reads the URL and breaks it into parts — the scheme (`https`), the host (`tryhackme.com`), the path (`/learn`), and any query strings or ports. This tells it *how* and *where* to make the request.
+
+**3. DNS lookup**
+The browser doesn't know the IP address of `tryhackme.com`, so it asks a DNS (Domain Name System) server to translate the domain name into an actual IP address like `104.26.10.78`. Think of DNS like a phonebook for the internet.
+
+**4. HTTP/HTTPS request sent**
+Now the browser builds and sends an HTTP request to that IP address. The request includes the method (GET, POST, etc.), the path, headers like `User-Agent` and `Host`, and any cookies. If it's HTTPS, the data is encrypted first.
+
+**5. Server processes the request**
+The web server receives the request. On the back end, it figures out what you're asking for — it might query a database, run some logic, check if you're logged in, and so on. This is everything the user never directly sees.
+
+**6. HTTP response returned**
+The server sends back a response. This includes a status code (like `200 OK` or `404 Not Found`), response headers (content type, cache rules, cookies to set), and the actual content — usually HTML, CSS, and JavaScript files.
+
+**7. Browser renders the page**
+The browser receives the response and starts building the page. HTML defines the structure, CSS applies the styling, and JavaScript adds interactivity. The result is the finished webpage you see on screen.
+
+---
+
+In short: **You → URL → DNS → Request → Server → Response → Page.** Every website visit follows this exact path, usually in under a second.
