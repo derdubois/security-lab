@@ -1,55 +1,79 @@
-After learning about virtualization, you were hired to be responsible for the virtual environment for AutoGalo, a company that has recently started using lab machines.
-In this company, they use an application called Virtualization Manager. This application provides a clear view of the overall status of an entire virtualization environment, providing details of each virtualized instance and the physical hosts. It also enables you to run actions and manage the VMs you create.
+## Virtualization: Concepts and Practical Application
 
-Your manager has asked you to investigate an issue with the email service. Essentially, everyone in the company stopped receiving emails today, and no one knows what happened.
+### Historical Context — The Problem
 
-Open the Virtualization Manager site by clicking the View Site button below, and let's investigate!
+Before virtualization, IT followed a **"one server = one application"** rule. Each service (website, database, email, internal app) required its own dedicated physical machine. This created four major problems:
 
+- **High cost** — hardware, electricity, cooling, maintenance, and data center space all multiplied with each server added.
+- **Low utilization** — most servers operated at only 5–20% capacity, wasting CPU, RAM, and storage.
+- **Slow deployment** — provisioning a new physical server could take days or weeks.
+- **Poor scalability** — sudden resource demand often meant purchasing yet another machine.
 
-View Site
-Analyzing Lab Machine States
-In the home screen, you should see three main sections:
+---
 
-Summary: Provides a generic view of the state of the environment.
-Lab Machines: Provides details of each VM and enables you to run actions on them.
-Hosts: Displays usage and performance details for each physical server.
-Go to the Lab Machines section and look for the VM with the name Mail-SERVER:
+### The Solution — Virtualization
 
-Lab Machine section screenshot highlighting the Mal-SERVER machine.
+Virtualization introduced the idea of safely sharing a single physical server across multiple applications through a software layer called a **hypervisor**.
 
-Looks like this lab machine has entered an Error state. Let's try rerunning this VM using the Blue Square Button to restart it.
+**The Building Analogy:**
+- Physical server = the building
+- Lab Machines (VMs) = apartments
+- Applications/OS = tenants
+- Hypervisor = the building manager
 
-Lab Machines section screenshot highlighting the restart button.
+Just as apartments let multiple people share one building independently, VMs let multiple systems share one server while remaining fully isolated from each other.
 
-After running again, it appears to be working correctly, with no errors!
+---
 
-Creating a Lab Machine
-As part of your routine, you create lab machines for other teams. After resolving the email server issue, you received a task to create a VM to support the marketing team's website.
+### Key Components
 
-Now, let's create a VM to host their marketing website. In the Lab Machines section, locate the + Create VM button on the top right side of the Lab Machines section and click on it.
+**1. Hypervisor**
+The software that creates, manages, and isolates virtual machines. Two types:
 
-Lab Machines section screenshot highlighting the "+ Create VM" button.You should fill out the form with how much hardware your lab machine will be using:
+| Type | Runs On | Best For |
+|---|---|---|
+| Type 1 | Bare metal (directly on hardware) | Production servers, data centers, databases |
+| Type 2 | On top of an existing OS | Testing, learning, Kali Linux, malware analysis |
 
-Name: Marketing-VM
-CPU Cores: 4
-Memory (GB): 8
-Disk Size (GB): 100
-Then click on Create VM
+> ⚠️ When testing malware in a VM, isolate the guest from the host to prevent infection.
 
-Screenshot of the form to create a VM.
-Now, at the top of the list of Lab Machines, you should see your created VM:
+**2. Lab Machines (VMs)**
+Virtual computers created by the hypervisor. Each has its own virtual CPU, RAM, storage, and network. They are fully isolated — if one crashes, others keep running. Common tools: **Oracle VirtualBox** and **VMware Workstation** (both Type 2).
 
-Lab Machines section screenshot highlighting the new Marketing-VM created.
+**3. Containers**
+Lightweight isolated environments that run a single application. Unlike VMs, containers **share the host's OS kernel** rather than running their own, making them faster to start and less resource-intensive. Trade-off: they must match the host OS type (e.g., can't run a Windows container on Linux). Key tool: **Docker**.
 
-Analyzing Hardware Usage
-Another routine task you have is to manage the health of the physical servers and report status to your manager. Go to the Hosts section at the bottom of the page:
+**Summary of hierarchy:**
+```
+Physical Server → Hypervisor → VMs (full OS) → Containers (app-level)
+```
+VMs = "full apartments" (maximum isolation and flexibility)
+Containers = "rooms inside apartments" (lightweight, fast, scalable)
 
-Screenshot of Hosts section.
-By analyzing it, we can identify:
+---
 
-HV-PROD-01 has the capacity to host more VMs.
-HV-PROD-02 is almost operating at 100% of its capacity, and we might need to report this!
-HV-BACKUP-01 is disconnected and does not host any VMs.
-Hosts section screenshot highlighting the insights mentioned above.
+### Practical Scenario — AutoGalo Company
 
-Now, answer the following task questions to conclude your shift as the responsible for virtualization in AutoGalo!
+The reader is placed in the role of a virtualization administrator at **AutoGalo**, using a tool called **Virtualization Manager**.
+
+**Task 1 — Diagnosing a Problem**
+The company's email stopped working. In the Lab Machines section, the VM named `Mail-SERVER` was found in an **Error** state. Restarting it via the restart button resolved the issue.
+
+**Task 2 — Creating a New VM**
+A new VM was created for the marketing team with these specs:
+- Name: `Marketing-VM`
+- CPU Cores: `4`
+- Memory: `8 GB`
+- Disk Size: `100 GB`
+
+**Task 3 — Monitoring Host Hardware**
+Three physical hosts were analyzed:
+- `HV-PROD-01` — healthy, has capacity for more VMs
+- `HV-PROD-02` — near **100% capacity**, needs to be reported to management
+- `HV-BACKUP-01` — **disconnected**, hosting no VMs
+
+---
+
+### Core Takeaway
+
+Virtualization transforms underutilized physical hardware into a flexible, efficient, and isolated multi-tenant environment — reducing costs, speeding up deployment, and enabling better resource management across an organization.
