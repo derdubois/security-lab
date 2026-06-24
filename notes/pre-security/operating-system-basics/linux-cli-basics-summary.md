@@ -1,9 +1,3 @@
-Here are your detailed notes from the TryHackMe Linux Basics room.---
-
-## Detailed notes — TryHackMe Linux Basics (Day 1)
-
----
-
 ### The terminal
 
 The terminal is a text-based interface for controlling a Linux system. Cybersecurity professionals prefer it because it is faster than a GUI, offers more precise control, and most security tools are CLI-only.
